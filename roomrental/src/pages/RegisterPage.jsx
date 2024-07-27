@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import '../styles/Register.scss';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-import { useEffect } from 'react';
 
 const RegisterPage = () => {
 
@@ -34,7 +33,7 @@ const RegisterPage = () => {
 
     useEffect(()=> {
         setPasswordMatch( formData.password === formData.confirmPassword || formData.confirmPassword === '')
-    }, [])
+    })
 
     const handleSubmit = async (e) => {
         e.preventDefault();

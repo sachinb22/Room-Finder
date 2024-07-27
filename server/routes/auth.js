@@ -34,7 +34,7 @@ router.post('/register', upload.single('profileImage'), async (req, res) => {
 
         // check if user exists
         const existingUser = await User.findOne({ email })
-        if(existingUser) {
+        if(!existingUser) {
             return res.status(409).json({message: 'User already exists!'})
         }
         // hass the pasword
@@ -47,7 +47,7 @@ router.post('/register', upload.single('profileImage'), async (req, res) => {
             firstName,
             lastName,
             email,
-            password: hashedPassword,
+            password: hashPassword,
             profileImagePath,
         });
 
@@ -62,5 +62,35 @@ router.post('/register', upload.single('profileImage'), async (req, res) => {
         res.status(500).json({ message: "Registration failed", error: err.message })
     }
 } )
+
+//USer login
+router.post('/login', async(req, res) => {
+    try {
+        //take the information form the form
+        const {email,password} = req.body
+
+        //check if the user exists
+        const user = await User.findOne({ email })
+        if(!user) {
+            return res.status(409).json({message: 'User does not  exists!'})
+        }
+
+        //compare the password with the hased password
+        const isMatch = await bcrypt.compare(password, user.hashPassword)
+        if(!isMatch){
+            return res.status(400).json({message: 'Invalid Credentials!'})
+        }
+
+        //generate JWT token
+        const token = jwt.sign({id:user._id}, process.env.JWT_SECRET)
+        delete user.password
+
+        res.status(200).json({token,user})
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({error: err.message})
+    }
+})
 
 module.exports = router
