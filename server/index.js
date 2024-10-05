@@ -1,25 +1,3 @@
-// const express = require('express')
-// const app = express()
-// const mongoose =  require('mongoose')
-// const dotenv = require('dotenv').config()
-// const cors = require('cors')
-// const router = express.Router();
-
-// const authRoutes = require('./routes/auth')
-
-// app.use(cors())
-// app.use(express.json())
-// app.use(express.static('public'))
-
-// // Routes
-// app.use('/auth', authRoutes)
-
-// mongoose.connect('mongodb://127.0.0.1:27017/roomRental')
-
-// app.listen(3001, () => {
-//     console.log('Server is Running')
-// })
-
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");

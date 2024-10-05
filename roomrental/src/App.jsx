@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
+import CreateListing from './components/CreateListing';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route exact path='/' element={< HomePage />} />
         <Route exact path='/login' element={< LoginPage />} />
         <Route exact path='/register' element={< RegisterPage />} />
+        <Route exact path='/create-listing' element={< CreateListing />} />
       </Routes>
     </BrowserRouter>
     
